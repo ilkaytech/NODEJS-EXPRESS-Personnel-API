@@ -44,6 +44,13 @@ app.all("/", (req, res) => {
     message: "Welcome to PERSONNEL API",
   });
 });
+
+// /departments
+app.use("/departments", require("./src/routes/department.router"));
+
+// /personnels
+app.use("/personnels", require("./src/routes/personnel.router"));
+
 /*------------------------------------------------*/
 // errorHandler:
 app.use(require("./src/middlewares/errorHandler"));

@@ -5,16 +5,19 @@
 const { mongoose } = require("../config/dbConnection");
 /* --------------------------------*/
 
-const DepartmenSchema = new mongoose.Schema(
+const DepartmentSchema = new mongoose.Schema(
   {
-    name: String,
-    trim: true,
-    required: true,
-    unique: true,
+    name: {
+      type: String,
+      trim: true,
+      required: true,
+      unique: true,
+    },
   },
   {
-    collection: "departments, timestamps:true",
+    collection: "departments",
+    timestamps: true,
   }
 );
 /* --------------------------------*/
-module.exports = mongoose.model("Department", DepartmentsSchema);
+module.exports = mongoose.model("Department", DepartmentSchema);
