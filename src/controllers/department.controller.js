@@ -7,12 +7,13 @@ const Department = require("../models/department.model");
 
 module.exports = {
   list: async (req, res) => {
+    // const data = await Department.find(search).sort(sort).skip(skip).limit(limit)
     const data = await res.getModelList(Department);
 
     res.status(200).send({
       error: false,
       detail: await res.getModelListDetails(Department),
-      data, // data:data
+      data, // data: data
     });
   },
 
@@ -51,11 +52,32 @@ module.exports = {
       error: !data.deletedCount,
       data,
     });
+
     // const isDeleted = data.deletedCount >= 1 ? true : false
 
     // res.status(isDeleted ? 204 : 404).send({
     //     error: !isDeleted,
     //     data
     // })
+  },
+
+  personnels: async (req, res) => {
+    const Personnel = require("../models/personnel.model");
+
+    const data = await res.getModelList(
+      Personnel,
+      { departmentId: req.params.id },
+      "departmentId"
+    );
+
+    res.status(200).send({
+      error: false,
+      detail: await res.getModelListDetails(
+        Personnel,
+        { departmentId: req.params.id },
+        "departmentId"
+      ),
+      data,
+    });
   },
 };
