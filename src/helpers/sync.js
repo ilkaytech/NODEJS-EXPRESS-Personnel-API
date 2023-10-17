@@ -5,10 +5,10 @@
 // SYCHRONIZATION:
 
 module.exports = async function () {
-  return null;
+  // return null;
 
   /* REMOVE DATABASE */
-  const { mongoose } = require("../configs/dbConnection");
+  const { mongoose } = require("../config/dbConnection");
   await mongoose.connection.dropDatabase();
   console.log("- Database and all data DELETED!");
   /* REMOVE DATABASE */
