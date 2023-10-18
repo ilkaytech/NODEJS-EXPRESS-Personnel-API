@@ -1,15 +1,16 @@
 {
+  "title": "Personnel API",
   "name": "personnel-api",
   "version": "1.0.0",
-  "description": "",
+  "description": "Personnel Management System",
   "main": "index.js",
   "scripts": {
     "start": "nodemon",
     "debug": "DEBUG=* nodemon"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "ilkaytech",
+  "license": "BSD License",
   "dependencies": {
     "cookie-session": "^2.0.0",
     "dotenv": "^16.3.1",
@@ -18,6 +19,7 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^7.6.2",
     "morgan": "^1.10.0",
-    "swagger-autogen": "^2.23.6"
+    "swagger-autogen": "^2.23.6",
+    "swagger-ui-express": "^5.0.0"
   }
 }

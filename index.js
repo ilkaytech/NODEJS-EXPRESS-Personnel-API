@@ -99,6 +99,19 @@ app.use(require("./src/middlewares/findSearchSortPage"));
 //   next();
 // });
 app.use(require("./src/middlewares/authenticated"));
+
+// Swagger-UI Middleware:
+const swaggerUi = require("swagger-ui-express");
+const swaggerJson = require("./swagger.json");
+// Parse/Run swagger.json and publish on any URL:
+app.use(
+  "/docs/swagger",
+  swaggerUi.serve,
+  swaggerUi.setup(swaggerJson, {
+    swaggerOptions: { persistAuthorization: true },
+  })
+);
+
 /* ------------------------------------------------------- */
 // Routes:
 
