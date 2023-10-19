@@ -3,12 +3,28 @@
     EXPRESS - Personnel API
 -------------------------------- */
 // JWT
+
 const jwt = require("jsonwebtoken");
 const Personnel = require("../models/personnel.model");
 const checkUserAndSetToken = require("../helpers/checkUserAndSetToken");
 
 module.exports = {
   login: async (req, res) => {
+    /*
+            #swagger.tags = ['Authentication']
+            #swagger.summary = 'JWT: Login'
+            #swagger.description = 'Login with username and password'
+            _swagger.deprecated = true
+            _swagger.ignore = true
+            #swagger.parameters['body'] = {
+                in: 'body',
+                required: true,
+                schema: {
+                    username: 'test',
+                    password: '1234'
+                }
+            }
+        */
     /*
         const { username, password } = req.body
 
@@ -72,13 +88,28 @@ module.exports = {
   },
 
   refresh: async (req, res) => {
+    /*
+            #swagger.tags = ['Authentication']
+            #swagger.summary = 'JWT: Refresh'
+            #swagger.description = 'Refresh accesToken with refreshToken'
+            #swagger.parameters['body'] = {
+                in: 'body',
+                required: true,
+                schema: {
+                    token: {
+                        refresh: '...refreshToken...'
+                    }
+                }
+            }
+        */
+
     const refreshToken = req.body?.token?.refresh || null;
 
     if (refreshToken) {
       const jwtData = jwt.verify(refreshToken, process.env.REFRESH_KEY);
 
       if (jwtData) {
-        const checkUser = await checkUserAndSetToken(jwtData, false);
+        const checkUser = await checkUserAndSetToken(jwtData, "refresh");
         if (checkUser.error) {
           res.errorStatusCode = 401;
           throw new Error(checkUser.message);
@@ -96,6 +127,11 @@ module.exports = {
   },
 
   logout: async (req, res) => {
+    /*
+            #swagger.tags = ['Authentication']
+            #swagger.summary = 'JWT: Logout'
+            #swagger.description = 'No need any doing for logout. You must deleted Bearer Token from your browser.'
+        */
     res.send({
       error: false,
       message:

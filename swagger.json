@@ -30,7 +30,31 @@
   "paths": {
     "/auth/login": {
       "post": {
-        "description": "",
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "JWT: Login",
+        "description": "Login with username and password",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "username": {
+                  "type": "string",
+                  "example": "test"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "1234"
+                }
+              }
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -40,7 +64,46 @@
     },
     "/auth/refresh": {
       "post": {
-        "description": "",
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "JWT: Refresh",
+        "description": "Refresh accesToken with  ",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "token": {
+                  "type": "object",
+                  "properties": {
+                    "refresh": {
+                      "type": "string",
+                      "example": "...refreshToken..."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/auth/logout": {
+      "get": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "JWT: Logout",
+        "description": "No need any doing for logout. You must deleted Bearer Token from your browser.",
         "responses": {
           "200": {
             "description": "OK"
@@ -50,7 +113,11 @@
     },
     "/departments/": {
       "get": {
-        "description": "",
+        "tags": [
+          "Departments"
+        ],
+        "summary": "List Departments",
+        "description": "  You can send query with endpoint for search[], sort[], page and limit.  <ul> Examples:   <li>URL/?<b>search[field1]=value1&search[field2]=value2</b></li>   <li>URL/?<b>sort[field1]=1&sort[field2]=-1</b></li>   <li>URL/?<b>page=2&limit=1</b></li>  </ul>  ",
         "responses": {
           "200": {
             "description": "OK"
@@ -58,7 +125,27 @@
         }
       },
       "post": {
+        "tags": [
+          "Departments"
+        ],
+        "summary": "Create Department",
         "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Test Department"
+                }
+              }
+            }
+          }
+        ],
         "responses": {
           "201": {
             "description": "Created"
@@ -68,6 +155,10 @@
     },
     "/departments/{id}": {
       "get": {
+        "tags": [
+          "Departments"
+        ],
+        "summary": "Get Single Department",
         "description": "",
         "parameters": [
           {
@@ -84,6 +175,10 @@
         }
       },
       "put": {
+        "tags": [
+          "Departments"
+        ],
+        "summary": "Update Department",
         "description": "",
         "parameters": [
           {
@@ -91,6 +186,20 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Test Department"
+                }
+              }
+            }
           }
         ],
         "responses": {
@@ -100,6 +209,10 @@
         }
       },
       "delete": {
+        "tags": [
+          "Departments"
+        ],
+        "summary": "Delete Department",
         "description": "",
         "parameters": [
           {
@@ -119,6 +232,10 @@
         }
       },
       "patch": {
+        "tags": [
+          "Departments"
+        ],
+        "summary": "Update Department",
         "description": "",
         "parameters": [
           {
@@ -126,6 +243,20 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Test Department"
+                }
+              }
+            }
           }
         ],
         "responses": {
@@ -137,6 +268,10 @@
     },
     "/departments/{id}/personnels": {
       "get": {
+        "tags": [
+          "Departments"
+        ],
+        "summary": "Get Personnels of any Department",
         "description": "",
         "parameters": [
           {
@@ -144,33 +279,6 @@
             "in": "path",
             "required": true,
             "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/personnels/login": {
-      "post": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "username": {
-                  "example": "any"
-                },
-                "password": {
-                  "example": "any"
-                }
-              }
-            }
           }
         ],
         "responses": {
@@ -575,7 +683,7 @@
             },
             "default": {
               "type": "number",
-              "example": 1697721595230
+              "example": 1697734284760
             }
           }
         }
