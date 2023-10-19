@@ -75,7 +75,7 @@ module.exports = {
                     name: 'Test Department'
                 }
             }
-    */
+   */
 
     const data = await Department.updateOne({ _id: req.params.id }, req.body);
 

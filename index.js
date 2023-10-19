@@ -112,6 +112,40 @@ app.use(
   })
 );
 
+// Redoc:
+const redoc = require("redoc-express");
+app.use("/docs/json", (req, res) => {
+  res.sendFile("swagger.json", { root: "." });
+});
+app.use(
+  "/docs/redoc",
+  redoc({
+    specUrl: "/docs/json",
+    title: "API Docs",
+    redocOptions: {
+      theme: {
+        colors: {
+          primary: {
+            main: "#6EC5AB",
+          },
+        },
+        typography: {
+          fontFamily: `"museo-sans", 'Helvetica Neue', Helvetica, Arial, sans-serif`,
+          fontSize: "15px",
+          lineHeight: "1.5",
+          code: {
+            code: "#87E8C7",
+            backgroundColor: "#4D4D4E",
+          },
+        },
+        menu: {
+          backgroundColor: "#ffffff",
+        },
+      },
+    },
+  })
+);
+
 /* ------------------------------------------------------- */
 // Routes:
 
@@ -120,6 +154,14 @@ app.all("/", (req, res) => {
   res.send({
     error: false,
     message: "Welcome to PERSONNEL API",
+    api: {
+      documents: {
+        swagger: "http://127.0.0.1:8000/docs/swagger",
+        redoc: "http://127.0.0.1:8000/docs/redoc",
+        json: "http://127.0.0.1:8000/docs/json",
+      },
+      contact: "www.ilkaytech.com",
+    },
     // session: req.session,
     isLogin: req.isLogin,
     user: req.user,
